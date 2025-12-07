@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Home as HomeIcon, Briefcase, Award, Zap, BookOpen, Mail, Phone, MessageCircle, Heart, Linkedin, HelpCircle, Download, Code, Loader2, ArrowUpRight, Bot, Globe, MapPin, User, Star } from 'lucide-react';
+import { Home as HomeIcon, Briefcase, Award, Zap, BookOpen, Mail, Phone, MessageCircle, Heart, Linkedin, HelpCircle, Download, Code, Loader2, ArrowUpRight, Globe, MapPin, User, Star } from 'lucide-react';
 import { NavItem, NeuralBackground } from './components/Shared';
-import { AIAssistant } from './components/AIAssistant';
 import Home from './components/Home';
 import Experience from './components/Experience';
 import Services from './components/Services';
 import Education from './components/Education';
 import Contact from './components/Contact';
+import Bio from './components/Bio';
 import Ministry from './components/Ministry';
 import FAQ from './components/FAQ';
 import Creator from './components/Creator';
-import AIPage from './components/AIPage';
 
 // Page Type Definition
-export type PageType = 'home' | 'experience' | 'services' | 'education' | 'contact' | 'ministry' | 'faq' | 'creator' | 'ai';
+export type PageType = 'home' | 'experience' | 'services' | 'education' | 'bio' | 'contact' | 'ministry' | 'faq' | 'creator';
 
 /* --- CINEMATIC TECH PRELOADER --- */
 const Preloader: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
@@ -95,11 +94,11 @@ const App: React.FC = () => {
       case 'experience': return <Experience />;
       case 'services': return <Services />;
       case 'education': return <Education />;
+      case 'bio': return <Bio />;
       case 'contact': return <Contact />;
       case 'ministry': return <Ministry />;
       case 'faq': return <FAQ />;
       case 'creator': return <Creator />;
-      case 'ai': return <AIPage />;
       default: return <Home changePage={setActivePage} />;
     }
   };
@@ -121,8 +120,8 @@ const App: React.FC = () => {
             <NavItem active={activePage === 'services'} onClick={() => setActivePage('services')} icon={Zap} index={2}>Services</NavItem>
             <NavItem active={activePage === 'education'} onClick={() => setActivePage('education')} icon={BookOpen} index={3}>Edu</NavItem>
             <NavItem active={activePage === 'ministry'} onClick={() => setActivePage('ministry')} icon={Heart} index={4}>Ministry</NavItem>
-            <NavItem active={activePage === 'contact'} onClick={() => setActivePage('contact')} icon={Mail} index={5}>Bio</NavItem>
-            <NavItem active={activePage === 'ai'} onClick={() => setActivePage('ai')} icon={Bot} index={6}>AI</NavItem>
+            <NavItem active={activePage === 'bio'} onClick={() => setActivePage('bio')} icon={User} index={5}>Bio</NavItem>
+            <NavItem active={activePage === 'contact'} onClick={() => setActivePage('contact')} icon={Mail} index={6}>Contact</NavItem>
             <NavItem active={activePage === 'faq'} onClick={() => setActivePage('faq')} icon={HelpCircle} index={7}>FAQ</NavItem>
             <NavItem active={activePage === 'creator'} onClick={() => setActivePage('creator')} icon={Code} index={8}>Dev</NavItem>
             <button
@@ -216,47 +215,66 @@ const App: React.FC = () => {
                  &copy; 2025 Prasath Portfolio. All Rights Reserved.
                </div>
 
-               {/* DESIGNER CREDIT - FOCAL POINT */}
+               {/* DESIGNER CREDIT - FOCAL POINT - MAGNIFICENT */}
                <button 
                   onClick={() => { setActivePage('creator'); window.scrollTo({top: 0, behavior: 'smooth'}); }}
-                  className="group relative w-full md:w-auto max-w-2xl px-4 md:px-0"
+                  className="group relative w-full md:w-auto max-w-4xl mx-auto block transform hover:scale-105 transition-all duration-500"
                >
-                  <div className="absolute -inset-1 bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-                  <div className="relative px-6 py-6 md:px-10 md:py-8 bg-slate-900 ring-1 ring-slate-800 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-slate-800/50 transition-colors duration-300 backdrop-blur-xl">
-                      <span className="text-[10px] md:text-xs font-mono text-teal-500 tracking-[0.3em] md:tracking-[0.5em] uppercase group-hover:text-teal-400 transition-colors text-center">Masterfully Crafted By</span>
-                      <div className="flex items-center gap-2 md:gap-4 flex-wrap justify-center">
-                          <Code size={24} className="md:w-8 md:h-8 text-orange-500 group-hover:rotate-12 transition-transform duration-500" />
-                          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-orange-400 to-red-500 filter drop-shadow-lg group-hover:drop-shadow-[0_0_25px_rgba(251,146,60,0.6)] transition-all duration-500 tracking-tight text-center">
+                  {/* Outer Glow/Border Gradient */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 via-red-500 to-yellow-500 rounded-3xl blur opacity-20 group-hover:opacity-100 transition duration-700 group-hover:duration-200 animate-gradient-x"></div>
+
+                  {/* Main Card Container */}
+                  <div className="relative px-8 py-10 md:px-20 md:py-14 bg-slate-950 ring-1 ring-white/10 rounded-3xl overflow-hidden flex flex-col items-center justify-center gap-4 hover:ring-orange-500/50 transition-all duration-500">
+                      
+                      {/* Animated Background inside card */}
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(251,146,60,0.1),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 mix-blend-overlay"></div>
+
+                      {/* Content */}
+                      <span className="text-xs md:text-sm font-mono text-orange-500/80 tracking-[0.5em] uppercase group-hover:text-orange-400 transition-colors text-center z-10">
+                          Architected By
+                      </span>
+
+                      <div className="relative z-10 flex items-center gap-4 md:gap-8 flex-wrap justify-center">
+                          <Code size={40} className="md:w-12 md:h-12 text-slate-700 group-hover:text-orange-500 transition-colors duration-500 group-hover:rotate-12" />
+                          
+                          {/* THE NAME - GLOW & ROTATE */}
+                          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-700 via-slate-500 to-slate-700 group-hover:from-yellow-400 group-hover:via-orange-500 group-hover:to-red-500 transition-all duration-700 tracking-tighter filter group-hover:drop-shadow-[0_0_30px_rgba(249,115,22,0.6)] group-hover:-rotate-2 group-hover:scale-110">
                             S. Shaveesh Jeshurun
                           </h2>
-                          <Star size={24} className="md:w-8 md:h-8 text-yellow-500 group-hover:rotate-[-12deg] transition-transform duration-500 fill-yellow-500" />
+                          
+                          <Star size={40} className="md:w-12 md:h-12 text-slate-700 group-hover:text-yellow-500 transition-colors duration-500 group-hover:-rotate-12 fill-current" />
                       </div>
-                      <div className="mt-2 text-[10px] md:text-xs text-slate-500 group-hover:text-white transition-colors flex items-center gap-2">
-                         <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> Available for Hire <span className="text-slate-700">|</span> Click to View Profile
+
+                      <div className="mt-6 flex items-center gap-2 text-xs md:text-sm font-bold text-slate-600 group-hover:text-white transition-colors uppercase tracking-widest z-10">
+                         <span className="w-2 h-2 bg-slate-700 group-hover:bg-green-500 rounded-full transition-colors animate-pulse"></span> 
+                         View Developer Profile
                       </div>
                   </div>
                </button>
             </div>
           </div>
         </footer>
-
-        {/* AI Assistant - Floating Chat (Hidden on AI Page) */}
-        {activePage !== 'ai' && <AIAssistant changePage={setActivePage} />}
       </div>
     </>
   );
 };
 
-const SocialButton: React.FC<{ href: string, icon: any, color: string, label: string }> = ({ href, icon: Icon, color, label }) => (
-    <a 
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`w-12 h-12 bg-slate-900 rounded-full border border-slate-800 flex items-center justify-center text-slate-400 transition-all duration-300 ${color} hover:text-white hover:scale-110 hover:border-transparent shadow-lg`}
-        title={label}
-    >
-        <Icon size={20} />
-    </a>
-);
+const SocialButton: React.FC<{ href: string, icon: any, color: string, label: string }> = ({ href, icon: Icon, color, label }) => {
+    // Check if link is mailto or tel to avoid opening new tab
+    const isDirectAction = href.startsWith('mailto:') || href.startsWith('tel:');
+    
+    return (
+        <a 
+            href={href}
+            target={isDirectAction ? "_self" : "_blank"}
+            rel="noopener noreferrer"
+            className={`w-12 h-12 bg-slate-900 rounded-full border border-slate-800 flex items-center justify-center text-slate-400 transition-all duration-300 ${color} hover:text-white hover:scale-110 hover:border-transparent shadow-lg`}
+            title={label}
+        >
+            <Icon size={20} />
+        </a>
+    );
+};
 
 export default App;
