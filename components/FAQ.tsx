@@ -5,24 +5,24 @@ import { SectionTitle, Card, RevealOnScroll } from './Shared';
 const FAQ: React.FC = () => {
   const faqs = [
     {
-      question: "What is your total experience in HR?",
-      answer: "I have over 17 years of extensive experience in Human Resource Management and Operations, ranging from executive roles to managerial positions."
+      question: "Are you available for freelance projects?",
+      answer: "I am currently a student, but I am open to discussing small-scale web development or design projects that fit my schedule."
     },
     {
-      question: "Which industries have you worked in?",
-      answer: "I have worked primarily in the Textile and Garment manufacturing sectors, as well as managing family business operations involving various administrative functions."
+      question: "What programming languages do you know?",
+      answer: "I have a strong foundation in C, C++, HTML, and CSS. I am also currently learning React and basic JavaScript."
     },
     {
-      question: "Do you handle statutory compliance?",
-      answer: "Yes, I have deep expertise in handling government records including ESI, EPF, Factory Act compliance, and other statutory requirements."
+      question: "Do you create designs as well as code?",
+      answer: "Yes, I am passionate about design. I create posters, PowerPoint presentations, and basic UI designs in addition to coding."
     },
     {
-      question: "What is your role in City of Truth Ministries?",
-      answer: "I serve as a part-time Evangelist (for 8 years), involved in discipleship, church ministry, and community outreach programs."
+      question: "What kind of school leadership experience do you have?",
+      answer: "I served as a Class Leader for 5 consecutive years (4th-8th Grade) at Velammal Vidhyashram, managing classroom activities and student coordination."
     },
     {
-      question: "Are you open to relocation?",
-      answer: "I am currently based in Valparai/Coimbatore. Please feel free to contact me to discuss potential opportunities and locations."
+      question: "Where are you based?",
+      answer: "I live in Ambattur, Chennai, Tamil Nadu, India."
     }
   ];
 
@@ -68,13 +68,13 @@ const FAQ: React.FC = () => {
                 <div className="w-12 h-12 bg-teal-500 rounded-lg flex items-center justify-center mb-4 text-white shadow-lg shadow-teal-500/30">
                   <FileText size={24} />
                 </div>
-                <h3 className="text-xl font-bold mb-2">Want the full details?</h3>
+                <h3 className="text-xl font-bold mb-2">Want to know more?</h3>
                 <p className="text-slate-400 text-sm mb-6">
-                  Download the comprehensive Bio-Data to view detailed work history, educational background, and personal information.
+                  Download my profile to view my academic achievements, skills, and project details.
                 </p>
                 <button onClick={() => window.print()} className="w-full bg-white text-slate-900 py-3 px-4 rounded-xl font-bold hover:bg-teal-400 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 group">
                   <Download size={18} className="group-hover:-translate-y-1 transition-transform" />
-                  Download Resume
+                  Download Profile
                 </button>
              </div>
            </RevealOnScroll>

@@ -4,7 +4,7 @@ import { SectionTitle, Card, RevealOnScroll, Typewriter } from './Shared';
 
 const AIPage: React.FC = () => {
   const [messages, setMessages] = useState([
-    { id: 1, type: 'bot', text: "SYSTEM ONLINE. I am the advanced AI interface for this portfolio. I can analyze Prasath's career data, generate summaries, or guide you through his experience. How may I assist?" }
+    { id: 1, type: 'bot', text: "SYSTEM ONLINE. I am the AI interface for S. Shaveesh Jeshurun's portfolio. I can analyze his coding skills, projects, and academic background. How may I assist?" }
   ]);
   const [input, setInput] = useState("");
   const [isThinking, setIsThinking] = useState(false);
@@ -24,19 +24,19 @@ const AIPage: React.FC = () => {
 
     // Simulate AI processing
     setTimeout(() => {
-        let response = "I process data regarding Prasath's 17+ years of HR experience.";
+        let response = "I process data regarding Shaveesh's skills and projects.";
         const lower = text.toLowerCase();
         
-        if (lower.includes('experience') || lower.includes('work')) {
-            response = "Prasath has extensive experience as an Operations Manager (2012-Present) and has held key HR roles at Emperor Textiles and VGB Clothings. He specializes in compliance, payroll, and administration.";
+        if (lower.includes('project') || lower.includes('work')) {
+            response = "Shaveesh has developed websites like cotministries.unaux.com and good2go.unaux.com. He also creates interactive presentations and posters.";
         } else if (lower.includes('contact') || lower.includes('email')) {
-            response = "You can reach Prasath at prasathr3009@gmail.com or call +91 72999 33882.";
-        } else if (lower.includes('ministry')) {
-            response = "He serves as an Evangelist at City of Truth Ministries, focusing on discipleship and community outreach.";
+            response = "You can reach Shaveesh at shaveesjeshururu18@gmail.com or call +91 98417 23628.";
+        } else if (lower.includes('skill') || lower.includes('code')) {
+            response = "Key Competencies: C, C++, HTML, CSS, Video Editing, and Poster Designing.";
+        } else if (lower.includes('school') || lower.includes('class')) {
+            response = "He is currently studying in Class 8 at Velammal Vidhyashram, Surapet.";
         } else if (lower.includes('hello') || lower.includes('hi')) {
-            response = "Greetings. I am ready to process your query regarding this portfolio.";
-        } else if (lower.includes('skills')) {
-            response = "Key Competencies: HR Consulting, Statutory Compliance (ESI/EPF), Payroll Management, and Industrial Relations.";
+            response = "Greetings. I am ready to process your query regarding this student profile.";
         }
 
         setMessages(prev => [...prev, { id: Date.now(), type: 'bot', text: response }]);
@@ -52,7 +52,7 @@ const AIPage: React.FC = () => {
             </div>
             <SectionTitle>Interactive AI Terminal</SectionTitle>
             <p className="text-slate-500 max-w-2xl mx-auto text-sm md:text-base px-4">
-                Engage with the portfolio's neural interface to access data instantly.
+                Engage with the portfolio's neural interface to access profile data instantly.
             </p>
        </div>
 
@@ -65,7 +65,7 @@ const AIPage: React.FC = () => {
                         <div className="w-2.5 h-2.5 bg-yellow-500 rounded-full"></div>
                         <div className="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
                         <span className="ml-2 md:ml-4 font-mono text-xs md:text-sm text-teal-400 flex items-center gap-2">
-                            <Command size={12} className="md:w-3.5 md:h-3.5" /> TERMINAL_V2.0
+                            <Command size={12} className="md:w-3.5 md:h-3.5" /> SHAVEESH_OS_V1.0
                         </span>
                     </div>
                     <div className="text-[10px] md:text-xs font-mono text-slate-500">STATUS: CONNECTED</div>
@@ -113,7 +113,7 @@ const AIPage: React.FC = () => {
                             onChange={(e) => setInput(e.target.value)}
                             onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                             className="flex-1 bg-slate-100 border-none rounded-xl px-4 py-3 md:px-6 md:py-4 focus:ring-2 focus:ring-teal-500 outline-none transition-all font-medium text-sm md:text-base"
-                            placeholder="Ask query..."
+                            placeholder="Enter command..."
                         />
                         <button 
                             onClick={() => handleSend()}
@@ -124,7 +124,7 @@ const AIPage: React.FC = () => {
                         </button>
                     </div>
                     <div className="mt-2 md:mt-3 flex gap-2 justify-center overflow-x-auto no-scrollbar pb-1">
-                        {['Experience', 'Contact', 'Ministry'].map(suggestion => (
+                        {['Projects', 'Skills', 'Contact'].map(suggestion => (
                             <button 
                                 key={suggestion}
                                 onClick={() => handleSend(suggestion)}

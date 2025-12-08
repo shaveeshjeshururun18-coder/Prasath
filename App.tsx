@@ -9,11 +9,11 @@ import Contact from './components/Contact';
 import Bio from './components/Bio';
 import Ministry from './components/Ministry';
 import FAQ from './components/FAQ';
-import Creator from './components/Creator';
+import AIPage from './components/AIPage';
 import { AIAssistant } from './components/AIAssistant';
 
 // Page Type Definition
-export type PageType = 'home' | 'experience' | 'services' | 'education' | 'bio' | 'contact' | 'ministry' | 'faq' | 'creator';
+export type PageType = 'home' | 'projects' | 'skills' | 'education' | 'bio' | 'contact' | 'ministry' | 'faq' | 'ai';
 
 /* --- CINEMATIC TECH PRELOADER --- */
 const Preloader: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
@@ -34,8 +34,8 @@ const Preloader: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
         
         // Status updates based on progress
         if (prev === 30) setStatus("LOADING ASSETS");
-        if (prev === 60) setStatus("CONNECTING NEURAL NET");
-        if (prev === 80) setStatus("FINALIZING UI");
+        if (prev === 60) setStatus("COMPILING CODE");
+        if (prev === 80) setStatus("OPTIMIZING UX");
         
         const diff = Math.floor(Math.random() * 5) + 2;
         return Math.min(prev + diff, 100);
@@ -68,7 +68,7 @@ const Preloader: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
             </div>
 
             {/* Typography */}
-            <h1 className="text-2xl md:text-3xl font-black text-white tracking-[0.2em] mb-2 font-inter">PRASATH<span className="text-teal-500">.</span>R</h1>
+            <h1 className="text-2xl md:text-3xl font-black text-white tracking-[0.2em] mb-2 font-inter">SHAVEESH JESHURUN</h1>
             <div className="h-6 overflow-hidden">
                 <p className="text-teal-400 font-mono text-[10px] md:text-xs tracking-widest animate-pulse">{status}</p>
             </div>
@@ -92,27 +92,27 @@ const App: React.FC = () => {
 
   const navItems = [
     { id: 'home', label: 'Home', icon: HomeIcon },
-    { id: 'experience', label: 'Exp', icon: Briefcase },
-    { id: 'services', label: 'Services', icon: Zap },
+    { id: 'projects', label: 'Projects', icon: Briefcase }, // Renamed from Experience
+    { id: 'skills', label: 'Skills', icon: Zap }, // Renamed from Services
     { id: 'education', label: 'Edu', icon: BookOpen },
     { id: 'ministry', label: 'Ministry', icon: Heart },
     { id: 'bio', label: 'Bio', icon: User },
     { id: 'contact', label: 'Contact', icon: Mail },
     { id: 'faq', label: 'FAQ', icon: HelpCircle },
-    { id: 'creator', label: 'Dev', icon: Code },
+    { id: 'ai', label: 'AI Chat', icon: Code },
   ] as const;
 
   const renderPage = () => {
     switch (activePage) {
       case 'home': return <Home changePage={setActivePage} />;
-      case 'experience': return <Experience />;
-      case 'services': return <Services />;
+      case 'projects': return <Experience />;
+      case 'skills': return <Services />;
       case 'education': return <Education />;
       case 'bio': return <Bio />;
       case 'contact': return <Contact />;
       case 'ministry': return <Ministry />;
       case 'faq': return <FAQ />;
-      case 'creator': return <Creator />;
+      case 'ai': return <AIPage />;
       default: return <Home changePage={setActivePage} />;
     }
   };
@@ -129,8 +129,8 @@ const App: React.FC = () => {
         {/* --- MOBILE HEADER & MENU --- */}
         <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 py-3 flex justify-between items-center shadow-sm">
             <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center text-white font-bold shadow-md">P</div>
-                <span className="font-bold text-slate-800 tracking-tight">Prasath R.</span>
+                <div className="w-9 h-9 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center text-white font-bold shadow-md text-xs">SSJ</div>
+                <span className="font-bold text-slate-800 tracking-tight">Shaveesh Jeshurun</span>
             </div>
             <button 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
@@ -206,20 +206,20 @@ const App: React.FC = () => {
               {/* Column 1: Brand */}
               <div className="md:col-span-5 space-y-6">
                  <div className="flex items-center gap-3">
-                     <div className="w-10 h-10 bg-gradient-to-br from-teal-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-teal-500/20">P</div>
+                     <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-teal-500/20">SSJ</div>
                      <div>
-                        <h3 className="text-2xl font-bold text-white tracking-tight">Prasath R.</h3>
-                        <p className="text-xs font-medium text-teal-500 uppercase tracking-widest">HR Professional</p>
+                        <h3 className="text-2xl font-bold text-white tracking-tight">Shaveesh Jeshurun</h3>
+                        <p className="text-xs font-medium text-teal-500 uppercase tracking-widest">Web Developer & Designer</p>
                      </div>
                  </div>
                  <p className="text-slate-400 leading-relaxed max-w-md">
-                   Empowering organizations through strategic human resource management, operational excellence, and integrity-driven leadership.
+                   Creative student developer passionate about building innovative digital solutions using AI, Coding, and Design.
                  </p>
                  <div className="flex gap-3">
-                    <SocialButton href="https://wa.me/917299933882" icon={MessageCircle} color="hover:bg-green-500" label="WhatsApp" />
-                    <SocialButton href="mailto:prasathr3009@gmail.com" icon={Mail} color="hover:bg-red-500" label="Email" />
+                    <SocialButton href="https://wa.me/919841723628" icon={MessageCircle} color="hover:bg-green-500" label="WhatsApp" />
+                    <SocialButton href="mailto:shaveesjeshururu18@gmail.com" icon={Mail} color="hover:bg-red-500" label="Email" />
                     <SocialButton href="https://www.linkedin.com/" icon={Linkedin} color="hover:bg-blue-600" label="LinkedIn" />
-                    <SocialButton href="tel:+917299933882" icon={Phone} color="hover:bg-amber-500" label="Call" />
+                    <SocialButton href="tel:+919841723628" icon={Phone} color="hover:bg-amber-500" label="Call" />
                  </div>
               </div>
 
@@ -227,7 +227,7 @@ const App: React.FC = () => {
               <div className="md:col-span-3">
                 <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-wider">Quick Access</h4>
                 <ul className="space-y-3">
-                  {['Experience', 'Services', 'Education', 'Ministry'].map(item => (
+                  {['Projects', 'Skills', 'Education', 'Ministry'].map(item => (
                     <li key={item}>
                       <button 
                         onClick={() => setActivePage(item.toLowerCase() as PageType)}
@@ -247,20 +247,19 @@ const App: React.FC = () => {
                     <div className="flex items-start gap-4">
                         <MapPin className="text-teal-500 mt-1 shrink-0" size={20} />
                         <div>
-                            <p className="text-white font-medium">Valparai, Coimbatore</p>
+                            <p className="text-white font-medium">Chennai / Ambattur</p>
                             <p className="text-xs">Tamil Nadu, India</p>
                         </div>
                     </div>
                     <div className="flex items-start gap-4">
                         <Phone className="text-teal-500 mt-1 shrink-0" size={20} />
                         <div>
-                            <p className="text-lg text-white font-bold font-mono hover:text-teal-400 transition-colors cursor-pointer">+91 72999 33882</p>
-                            <p className="text-lg text-white font-bold font-mono hover:text-teal-400 transition-colors cursor-pointer">+91 72009 53082</p>
+                            <p className="text-lg text-white font-bold font-mono hover:text-teal-400 transition-colors cursor-pointer">+91 98417 23628</p>
                         </div>
                     </div>
                     <div className="flex items-start gap-4">
                         <Mail className="text-teal-500 mt-1 shrink-0" size={20} />
-                        <a href="mailto:prasathr3009@gmail.com" className="text-slate-300 hover:text-white transition-colors">prasathr3009@gmail.com</a>
+                        <a href="mailto:shaveesjeshururu18@gmail.com" className="text-slate-300 hover:text-white transition-colors break-all">shaveesjeshururu18@gmail.com</a>
                     </div>
                 </div>
               </div>
@@ -269,18 +268,18 @@ const App: React.FC = () => {
             {/* Bottom Bar: Copyright & Designer Credit */}
             <div className="py-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs">
                <div className="text-slate-600 text-center md:text-left">
-                 &copy; 2025 Prasath Portfolio. All Rights Reserved.
+                 &copy; 2025 Shaveesh Portfolio. All Rights Reserved.
                </div>
 
                {/* DESIGNER CREDIT - ELEGANT BADGE */}
                <button 
-                  onClick={() => { setActivePage('creator'); window.scrollTo({top: 0, behavior: 'smooth'}); }}
+                  onClick={() => { setActivePage('home'); window.scrollTo({top: 0, behavior: 'smooth'}); }}
                   className="group flex items-center gap-3 px-5 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/5 hover:border-teal-500/20 transition-all duration-500"
                >
-                  <span className="text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em] group-hover:text-teal-400 transition-colors">Designed by</span>
+                  <span className="text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em] group-hover:text-teal-400 transition-colors">Developed by</span>
                   <div className="flex items-center gap-2 border-l border-white/10 pl-3">
                     <span className="font-bold text-lg text-slate-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:via-teal-200 group-hover:to-white bg-size-200 animate-gradient-x transition-all">
-                      S. Shaveesh Jeshurun
+                      Shaveesh Jeshurun
                     </span>
                   </div>
                </button>
@@ -288,8 +287,8 @@ const App: React.FC = () => {
           </div>
         </footer>
 
-        {/* AI Assistant Re-Added */}
-        <AIAssistant changePage={setActivePage} />
+        {/* AI Assistant - Hidden on AI Page */}
+        {activePage !== 'ai' && <AIAssistant changePage={setActivePage} />}
       </div>
     </>
   );

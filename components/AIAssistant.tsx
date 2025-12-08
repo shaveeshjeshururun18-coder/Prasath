@@ -15,10 +15,10 @@ interface AIAssistantProps {
 }
 
 const QUICK_REPLIES = [
-  { label: 'Experience?', action: 'experience' },
-  { label: 'Services', action: 'services' },
-  { label: 'Bio Data', action: 'contact' },
+  { label: 'Projects?', action: 'projects' },
+  { label: 'Skills', action: 'skills' },
   { label: 'Education', action: 'education' },
+  { label: 'Contact', action: 'contact' },
 ];
 
 export const AIAssistant: React.FC<AIAssistantProps> = ({ changePage }) => {
@@ -30,7 +30,7 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({ changePage }) => {
   
   // Chat State
   const [messages, setMessages] = useState<Message[]>([
-    { id: 1, type: 'bot', text: "Hi! I'm Prasath's AI Assistant. Ask me about his HR experience, skills, or ministry!" }
+    { id: 1, type: 'bot', text: "Hi! I'm Shaveesh's AI Assistant. Ask me about his coding skills, school projects, or hobbies!" }
   ]);
   const [input, setInput] = useState("");
   const [isBotThinking, setIsBotThinking] = useState(false);
@@ -140,31 +140,22 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({ changePage }) => {
       let action: PageType | undefined = undefined;
       const lowerInput = text.toLowerCase();
 
-      if (lowerInput.includes('resume') || lowerInput.includes('cv') || lowerInput.includes('bio') || lowerInput.includes('download')) {
-        botResponseText = "You can view Prasath's full Bio-Data and Resume on the Bio page.";
-        action = 'contact'; // Bio is now merged/handled via Contact or Bio page
-      } else if (lowerInput.includes('experience') || lowerInput.includes('work') || lowerInput.includes('job')) {
-        botResponseText = "Prasath has over 17 years of experience in HR and Operations. Let me show you his journey.";
-        action = 'experience';
-      } else if (lowerInput.includes('skill') || lowerInput.includes('services') || lowerInput.includes('consulting')) {
-          botResponseText = "His expertise includes HR Consulting, Payroll, Compliance, and Administration.";
-          action = 'services';
-      } else if (lowerInput.includes('education') || lowerInput.includes('mba') || lowerInput.includes('study')) {
-        botResponseText = "He holds an MBA in Human Resources.";
+      if (lowerInput.includes('project') || lowerInput.includes('web') || lowerInput.includes('site')) {
+        botResponseText = "Shaveesh has built several websites like cotministries.unaux.com. Check out his projects!";
+        action = 'projects';
+      } else if (lowerInput.includes('skill') || lowerInput.includes('code') || lowerInput.includes('program')) {
+          botResponseText = "He knows C, C++, HTML, CSS, and basic React. Let's see his skills.";
+          action = 'skills';
+      } else if (lowerInput.includes('school') || lowerInput.includes('class') || lowerInput.includes('education')) {
+        botResponseText = "He is a student at Velammal Vidhyashram, Class 8.";
         action = 'education';
-      } else if (lowerInput.includes('ministry') || lowerInput.includes('church') || lowerInput.includes('evangelist')) {
-        botResponseText = "Prasath is actively involved in City of Truth Ministries as an Evangelist.";
-        action = 'ministry';
-      } else if (lowerInput.includes('contact') || lowerInput.includes('mail') || lowerInput.includes('phone') || lowerInput.includes('call')) {
+      } else if (lowerInput.includes('contact') || lowerInput.includes('mail') || lowerInput.includes('phone')) {
           botResponseText = "You can contact him via email or phone. Navigating to contact info.";
           action = 'contact';
-      } else if (lowerInput.includes('creator') || lowerInput.includes('dev') || lowerInput.includes('shaveesh')) {
-          botResponseText = "Shaveesh is the brilliant developer behind this site! Taking you to his profile.";
-          action = 'creator';
       } else if (lowerInput.includes('hi') || lowerInput.includes('hello') || lowerInput.includes('hey')) {
-        botResponseText = "Hello! I am ready to assist you. Ask me about Prasath's HR expertise!";
+        botResponseText = "Hello! I am ready to assist you. Ask me about Shaveesh's coding journey!";
       } else {
-        botResponseText = "I'm here to help! Try asking about 'Experience', 'Services', or 'Bio-Data'.";
+        botResponseText = "I'm here to help! Try asking about 'Projects', 'Skills', or 'Education'.";
       }
 
       setIsBotThinking(false);
@@ -214,9 +205,9 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({ changePage }) => {
                  <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-slate-900"></span>
               </div>
               <div>
-                  <span className="font-bold text-sm block tracking-wide">Prasath's AI Guide</span>
+                  <span className="font-bold text-sm block tracking-wide">Shaveesh's Bot</span>
                   <span className="text-[10px] text-teal-300 flex items-center gap-1 opacity-80">
-                      Assistant Online
+                      Online
                   </span>
               </div>
             </div>
@@ -239,7 +230,7 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({ changePage }) => {
                    
                    {msg.action && msg.type === 'bot' && (
                      <div className="mt-3 pt-2 border-t border-slate-100 text-xs opacity-90 flex items-center gap-1 font-bold text-teal-600">
-                        <Sparkles size={12} className="animate-spin-slow" /> Navigating you there...
+                        <Sparkles size={12} className="animate-spin-slow" /> Opening page...
                      </div>
                    )}
                 </div>
@@ -279,7 +270,7 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({ changePage }) => {
             <input 
               type="text" value={input} onChange={(e) => setInput(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-              placeholder="Type your message..." 
+              placeholder="Ask me anything..." 
               disabled={isBotThinking}
               className="flex-1 px-4 py-3 bg-slate-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:bg-white transition-all disabled:opacity-50"
             />
@@ -304,7 +295,7 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({ changePage }) => {
         {/* Use Me Label - Static */}
         {!isOpen && !isDragging && (
             <div className="absolute bottom-full mb-3 right-0 bg-slate-900 text-white text-[10px] font-black px-3 py-1.5 rounded-lg shadow-md border border-slate-700 whitespace-nowrap z-50">
-                USE ME 🤖
+                AI CHAT 🤖
                 <div className="absolute top-full right-5 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-slate-900"></div>
             </div>
         )}

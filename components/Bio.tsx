@@ -1,11 +1,11 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Download, FileText, User, Calendar, Ruler, Book, Users, Heart, Map } from 'lucide-react';
-import { SectionTitle, Card, RevealOnScroll } from './Shared';
+import { Mail, Phone, MapPin, FileText, User, Calendar, Ruler, Book, Users, Heart, Map } from 'lucide-react';
+import { SectionTitle, Card } from './Shared';
 
 const Bio: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto py-8">
-      <SectionTitle>Bio-Data & Personal Profile</SectionTitle>
+      <SectionTitle>Bio-Data & Profile</SectionTitle>
 
       <div className="grid md:grid-cols-12 gap-8">
         
@@ -20,24 +20,23 @@ const Bio: React.FC = () => {
                <div className="w-28 h-28 bg-white/10 rounded-full flex items-center justify-center mb-6 backdrop-blur-sm ring-4 ring-white/5 group-hover:ring-teal-500/50 transition-all duration-500 group-hover:scale-105">
                   <User size={48} className="text-teal-400 group-hover:scale-110 transition-transform" />
                </div>
-               <h3 className="text-2xl font-bold mb-2 tracking-tight">R. Prasath</h3>
-               <p className="text-teal-400 font-medium mb-1">MBA (HR)</p>
-               <p className="text-slate-400 text-sm mb-6 bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700">HR Professional & Evangelist</p>
+               <h3 className="text-2xl font-bold mb-2 tracking-tight">Shaveesh Jeshurun</h3>
+               <p className="text-teal-400 font-medium mb-1">Student & Developer</p>
+               <p className="text-slate-400 text-sm mb-6 bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700">Class 8 | Velammal Vidhyashram</p>
                
                <div className="w-full space-y-3 text-left">
                  <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-transparent">
                     <div className="p-2 bg-teal-500/10 rounded-lg text-teal-400">
                         <Mail size={18} />
                     </div>
-                    <span className="text-sm font-medium text-slate-300 truncate">prasathr3009@gmail.com</span>
+                    <span className="text-sm font-medium text-slate-300 truncate" title="shaveesjeshururu18@gmail.com">shaveesjeshururu18...</span>
                  </div>
                  <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-transparent">
                     <div className="p-2 bg-teal-500/10 rounded-lg text-teal-400">
                         <Phone size={18} />
                     </div>
                     <div>
-                        <span className="block text-sm font-bold text-slate-300">+91 72999 33882</span>
-                        <span className="block text-sm font-bold text-slate-300">+91 72009 53082</span>
+                        <span className="block text-sm font-bold text-slate-300">+91 98417 23628</span>
                     </div>
                  </div>
                  <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-transparent">
@@ -45,8 +44,8 @@ const Bio: React.FC = () => {
                         <MapPin size={18} />
                     </div>
                     <div>
-                        <span className="block text-sm font-medium text-slate-300">Valparai, Coimbatore</span>
-                        <span className="block text-xs text-slate-500">Native: Dharapuram</span>
+                        <span className="block text-sm font-medium text-slate-300">Chennai, Tamil Nadu</span>
+                        <span className="block text-xs text-slate-500">Native: Ambattur</span>
                     </div>
                  </div>
                </div>
@@ -55,8 +54,8 @@ const Bio: React.FC = () => {
 
           {/* Resume Download */}
            <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center">
-                <h4 className="font-bold text-slate-800 mb-2">Download Resume</h4>
-                <p className="text-xs text-slate-500 mb-4">Get a detailed copy for your reference.</p>
+                <h4 className="font-bold text-slate-800 mb-2">Download Profile</h4>
+                <p className="text-xs text-slate-500 mb-4">Get a detailed copy of my student profile.</p>
                 <div className="flex gap-2 justify-center">
                     <button onClick={() => window.print()} className="flex-1 bg-white border border-slate-200 text-slate-700 py-2 rounded-lg text-xs font-bold hover:bg-slate-100 transition-colors flex items-center justify-center gap-1">
                         <FileText size={14} /> PDF
@@ -81,40 +80,35 @@ const Bio: React.FC = () => {
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-y-6 gap-x-8">
-                    <BioItem icon={Calendar} label="Date of Birth & Age" value="30-09-1982 (43 Years)" />
-                    <BioItem icon={Ruler} label="Height & Weight" value="5'7 ft / 73 Kg" />
+                    <BioItem icon={Calendar} label="Date of Birth & Age" value="18 November 2011 (14 Years)" />
+                    <BioItem icon={Map} label="Nationality" value="Indian" />
                     <BioItem icon={User} label="Gender" value="Male" />
-                    <BioItem icon={Book} label="Religion" value="Christian (CSI)" />
-                    <BioItem icon={Map} label="Native Place" value="Dharapuram" />
+                    <BioItem icon={Book} label="Religion" value="Christian" />
+                    <BioItem icon={Heart} label="Blood Group" value="O+" />
+                    <BioItem icon={Ruler} label="Hobbies" value="Coin Collecting, Coding, Electronics" />
                     
                     <div className="sm:col-span-2">
                         <BioItem icon={Users} label="Family Details" subValue={
-                            <div className="mt-3 grid sm:grid-cols-3 gap-3">
+                            <div className="mt-3 grid sm:grid-cols-2 gap-3">
                                 <div className="bg-blue-50 p-3 rounded-lg border border-blue-100 text-center hover:scale-105 transition-transform duration-300">
                                     <p className="text-xs text-slate-500 font-bold uppercase mb-1">Father</p>
-                                    <p className="font-bold text-blue-700">S. Rajendran</p>
-                                    <p className="text-xs text-blue-600">(Retd. Supervisor)</p>
+                                    <p className="font-bold text-blue-700">M. Santharaj Lasares</p>
                                 </div>
                                 <div className="bg-pink-50 p-3 rounded-lg border border-pink-100 text-center hover:scale-105 transition-transform duration-300">
                                     <p className="text-xs text-slate-500 font-bold uppercase mb-1">Mother</p>
-                                    <p className="font-bold text-pink-600">R. Jayalakshmi</p>
-                                </div>
-                                <div className="bg-purple-50 p-3 rounded-lg border border-purple-100 text-center hover:scale-105 transition-transform duration-300">
-                                    <p className="text-xs text-slate-500 font-bold uppercase mb-1">Siblings</p>
-                                    <p className="font-bold text-purple-600">3 Younger Sisters</p>
-                                    <p className="text-xs text-purple-500">(All Married)</p>
+                                    <p className="font-bold text-pink-600">S. Sripriya</p>
                                 </div>
                             </div>
                         } />
                     </div>
 
                     <div className="sm:col-span-2">
-                         <BioItem icon={Heart} label="Spiritual Info (Ministry)" subValue={
+                         <BioItem icon={Heart} label="Church Involvement" subValue={
                              <div className="mt-2 bg-gradient-to-r from-teal-50 to-blue-50 p-4 rounded-xl border border-teal-100">
                                  <p className="font-bold text-teal-800 text-lg mb-1">City of Truth Ministries, Chennai</p>
                                  <p className="text-slate-700 flex items-center gap-2">
                                      <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
-                                     Involved as Evangelist (Part-time, 8 Years)
+                                     Active in Media Ministry, Youth Participation, and Design.
                                  </p>
                              </div>
                          } />

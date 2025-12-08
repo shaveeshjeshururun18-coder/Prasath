@@ -11,7 +11,7 @@ const Creator: React.FC = () => {
                <Code size={40} />
            </div>
            <SectionTitle>About the Developer</SectionTitle>
-           <h2 className="text-4xl font-bold text-slate-800 mt-4 mb-2">S. Shaveesh Jeshurun</h2>
+           <h2 className="text-4xl font-bold text-slate-800 mt-4 mb-2">Shaveesh Jeshurun</h2>
            <p className="text-xl text-teal-600 font-medium mb-6">Aspiring Web Developer & Designer</p>
            
            <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-600">

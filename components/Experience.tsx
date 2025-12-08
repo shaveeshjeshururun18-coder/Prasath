@@ -1,72 +1,74 @@
 import React from 'react';
-import { Briefcase, CheckCircle, Users, Settings, TrendingUp } from 'lucide-react';
+import { Globe, Users, PenTool, Layout, Star } from 'lucide-react';
 import { SectionTitle, Card, RevealOnScroll } from './Shared';
 
 const Experience: React.FC = () => {
-  const jobs = [
+  const projects = [
     {
-      role: "Operations Manager (Family Business)",
-      company: "Self Employed",
-      location: "Coimbatore",
-      period: "2012 – Present",
+      role: "Web Development",
+      company: "Personal Projects",
+      location: "Chennai",
+      period: "Ongoing",
       color: "blue",
-      icon: Settings,
+      icon: Globe,
       details: [
-        "Managing brothers' business operations and overall administration.",
-        "Visiting company factories ensuring compliance is being followed.",
-        "Monitoring health and safety systems implementation and providing training.",
-        "Administration of Security guards, General Maintenance, Transportation, and Housekeeping."
+        "Developed and managed cotministries.unaux.com for City of Truth Ministries.",
+        "Created good2go.unaux.com to showcase web design skills.",
+        "Implemented responsive layouts and content management systems.",
+        "Focusing on user-friendly interfaces and clean code structure."
       ]
     },
     {
-      role: "Incharge - HR & Admin",
-      company: "M/s Emperor Textiles P Ltd., Tirupur",
-      location: "Tirupur",
-      period: "July 2011 – June 2012",
+      role: "Class Leader / Monitor",
+      company: "Velammal Vidhyashram",
+      location: "Surapet",
+      period: "4th - 8th Grade",
       color: "teal",
       icon: Users,
       details: [
-        "Reported to Chairman, MD, and Executive Director; managed 8 HR Executives.",
-        "Monitoring end-to-end payroll process and controlling employee personnel records.",
-        "Monitoring and updating government records like ESI, EPF, and IF records.",
-        "Ensuring queries from each department are responded to in time."
+        "Served as Class Leader for 5 consecutive years, demonstrating strong leadership.",
+        "Managed classroom activities and guided peers effectively.",
+        "Assisted teachers in organizing school events and coordinating projects.",
+        "Maintained discipline and facilitated communication between students and teachers."
       ]
     },
     {
-      role: "Executive – HR & Industrial Relations",
-      company: "VGB Clothings",
-      location: "Tirupur",
-      period: "August 2007 – June 2011",
-      color: "indigo",
-      icon: TrendingUp,
+      role: "Design & Multimedia",
+      company: "Ministry & School",
+      location: "Chennai",
+      period: "Volunteer",
+      color: "purple",
+      icon: PenTool,
       details: [
-        "Implementation of world standards like SA 8000:2008 and WRAP Standards.",
-        "Handling and monitoring the entire process of recruitment and staffing.",
-        "Periodically conducting meetings and taking important decisions for grievances."
+        "Created interactive PowerPoint presentations with animations for school projects.",
+        "Designed Bible-related digital materials for family ministry.",
+        "Created posters and visual content for City of Truth Ministries.",
+        "Edited videos for school assignments and personal creative projects."
       ]
     },
     {
-      role: "Executive – Admin & Client Relations",
-      company: "Sigma Computers",
-      location: "Coimbatore",
-      period: "August 2000 – April 2002",
-      color: "slate",
-      icon: Briefcase,
+      role: "Tech Presentations",
+      company: "School Events",
+      location: "Velammal Vidhyashram",
+      period: "Various",
+      color: "amber",
+      icon: Layout,
       details: [
-        "Handled client management and general administration.",
-        "Reported directly to the Managing Director."
+        "Successfully presented multiple school projects on technology topics.",
+        "Organized scripture-based content in visually engaging formats.",
+        "Demonstrated quick learning and creative problem-solving during presentations."
       ]
     }
   ];
 
   return (
     <div className="max-w-6xl mx-auto py-8">
-      <SectionTitle>Professional Journey</SectionTitle>
+      <SectionTitle>Projects & Leadership</SectionTitle>
       <div className="grid md:grid-cols-2 gap-8 relative">
         {/* Decorative Line */}
         <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-slate-200 via-teal-200 to-slate-200 -translate-x-1/2"></div>
         
-        {jobs.map((job, idx) => (
+        {projects.map((job, idx) => (
           <RevealOnScroll key={idx} delay={idx * 0.15} className={`flex flex-col h-full z-10 ${idx % 2 === 0 ? 'md:mr-8' : 'md:ml-8'}`}>
              <Card className="flex flex-col h-full hover:shadow-2xl hover:border-teal-300 transition-all duration-500">
                 <div className="flex items-start justify-between mb-4">
@@ -84,7 +86,7 @@ const Experience: React.FC = () => {
                 <ul className="space-y-3 mt-auto">
                   {job.details.map((detail, i) => (
                     <li key={i} className="flex items-start gap-3 text-slate-600 text-sm leading-relaxed group-hover:text-slate-800 transition-colors">
-                      <CheckCircle size={16} className={`mt-1 text-${job.color}-500 flex-shrink-0 opacity-70 group-hover:opacity-100`} />
+                      <Star size={16} className={`mt-1 text-${job.color}-500 flex-shrink-0 opacity-70 group-hover:opacity-100`} />
                       {detail}
                     </li>
                   ))}
