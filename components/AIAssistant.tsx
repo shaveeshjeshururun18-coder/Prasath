@@ -42,7 +42,7 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({ changePage }) => {
 
   useEffect(scrollToBottom, [messages, isOpen, isBotThinking]);
 
-  // Handle Dragging Logic
+  // Handle Dragging Logic (Mouse)
   const handleMouseDown = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
     if (target.closest('.chat-window')) return;
@@ -52,6 +52,20 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({ changePage }) => {
     setDragStart({
       x: e.clientX - position.x,
       y: e.clientY - position.y
+    });
+  };
+
+  // Handle Dragging Logic (Touch)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('.chat-window')) return;
+    
+    const touch = e.touches[0];
+    setIsDragging(true);
+    setHasMoved(false);
+    setDragStart({
+      x: touch.clientX - position.x,
+      y: touch.clientY - position.y
     });
   };
 
@@ -75,18 +89,43 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({ changePage }) => {
       });
     };
 
-    const handleMouseUp = () => {
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isDragging) return;
+      e.preventDefault(); // Prevent scrolling while dragging
+      
+      const touch = e.touches[0];
+      const newX = touch.clientX - dragStart.x;
+      const newY = touch.clientY - dragStart.y;
+      
+      if (Math.abs(newX - position.x) > 3 || Math.abs(newY - position.y) > 3) {
+          setHasMoved(true);
+      }
+
+      const maxX = window.innerWidth - 60;
+      const maxY = window.innerHeight - 60;
+      
+      setPosition({
+        x: Math.min(Math.max(0, newX), maxX),
+        y: Math.min(Math.max(0, newY), maxY)
+      });
+    };
+
+    const handleEnd = () => {
       setIsDragging(false);
     };
 
     if (isDragging) {
       window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
+      window.addEventListener('mouseup', handleEnd);
+      window.addEventListener('touchmove', handleTouchMove, { passive: false });
+      window.addEventListener('touchend', handleEnd);
     }
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('mouseup', handleEnd);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleEnd);
     };
   }, [isDragging, dragStart, position]);
 
@@ -103,7 +142,7 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({ changePage }) => {
 
       if (lowerInput.includes('resume') || lowerInput.includes('cv') || lowerInput.includes('bio') || lowerInput.includes('download')) {
         botResponseText = "You can view Prasath's full Bio-Data and Resume on the Bio page.";
-        action = 'contact';
+        action = 'contact'; // Bio is now merged/handled via Contact or Bio page
       } else if (lowerInput.includes('experience') || lowerInput.includes('work') || lowerInput.includes('job')) {
         botResponseText = "Prasath has over 17 years of experience in HR and Operations. Let me show you his journey.";
         action = 'experience';
@@ -152,13 +191,14 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({ changePage }) => {
   return (
     <div 
       style={{ left: position.x, top: position.y }}
-      className="fixed z-[100] flex flex-col items-end transition-shadow select-none"
+      className="fixed z-[100] flex flex-col items-end transition-shadow select-none touch-none"
     >
       {/* Chat Window */}
       {isOpen && (
         <div 
           className="chat-window bg-white/90 backdrop-blur-xl rounded-3xl shadow-[0_0_50px_rgba(13,148,136,0.2)] border border-teal-500/30 w-[90vw] md:w-96 mb-6 overflow-hidden animate-slideUpFade flex flex-col h-[450px] md:h-[520px] absolute bottom-20 right-0 max-w-[380px]"
           onMouseDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
         >
           {/* Header */}
           <div className="bg-gradient-to-r from-slate-900 via-teal-900 to-slate-900 p-4 text-white flex justify-between items-center cursor-default shadow-md relative overflow-hidden">
@@ -254,9 +294,10 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({ changePage }) => {
         </div>
       )}
       
-      {/* Draggable Button - Clean Version */}
+      {/* Draggable Button - Clean Version with Touch Support */}
       <button 
         onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart}
         onClick={() => { if (!hasMoved) setIsOpen(!isOpen); }}
         className={`group flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full transition-all duration-300 z-50 relative bg-slate-900 hover:bg-teal-600 hover:scale-105 shadow-[0_4px_20px_rgba(0,0,0,0.3)] ${isDragging ? 'cursor-grabbing scale-105' : 'cursor-grab'}`}
       >

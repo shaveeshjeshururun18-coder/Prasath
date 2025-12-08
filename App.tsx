@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home as HomeIcon, Briefcase, Award, Zap, BookOpen, Mail, Phone, MessageCircle, Heart, Linkedin, HelpCircle, Download, Code, Loader2, ArrowUpRight, Globe, MapPin, User, Star } from 'lucide-react';
+import { Home as HomeIcon, Briefcase, Zap, BookOpen, Mail, Phone, MessageCircle, Heart, Linkedin, HelpCircle, Download, Code, ArrowUpRight, MapPin, Menu, X, User } from 'lucide-react';
 import { NavItem, NeuralBackground } from './components/Shared';
 import Home from './components/Home';
 import Experience from './components/Experience';
@@ -10,6 +10,7 @@ import Bio from './components/Bio';
 import Ministry from './components/Ministry';
 import FAQ from './components/FAQ';
 import Creator from './components/Creator';
+import { AIAssistant } from './components/AIAssistant';
 
 // Page Type Definition
 export type PageType = 'home' | 'experience' | 'services' | 'education' | 'bio' | 'contact' | 'ministry' | 'faq' | 'creator';
@@ -87,6 +88,19 @@ const Preloader: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState<PageType>('home');
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navItems = [
+    { id: 'home', label: 'Home', icon: HomeIcon },
+    { id: 'experience', label: 'Exp', icon: Briefcase },
+    { id: 'services', label: 'Services', icon: Zap },
+    { id: 'education', label: 'Edu', icon: BookOpen },
+    { id: 'ministry', label: 'Ministry', icon: Heart },
+    { id: 'bio', label: 'Bio', icon: User },
+    { id: 'contact', label: 'Contact', icon: Mail },
+    { id: 'faq', label: 'FAQ', icon: HelpCircle },
+    { id: 'creator', label: 'Dev', icon: Code },
+  ] as const;
 
   const renderPage = () => {
     switch (activePage) {
@@ -112,29 +126,72 @@ const App: React.FC = () => {
         {/* Background decoration */}
         <NeuralBackground />
         
-        {/* Navigation */}
-        <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center p-2 md:p-4">
-          <div className="bg-white/90 backdrop-blur-md border border-slate-200 shadow-xl rounded-2xl md:rounded-full px-1 md:px-2 py-2 flex items-center gap-1 overflow-x-auto max-w-full w-full md:w-auto no-scrollbar justify-start md:justify-center">
-            <NavItem active={activePage === 'home'} onClick={() => setActivePage('home')} icon={HomeIcon} index={0}>Home</NavItem>
-            <NavItem active={activePage === 'experience'} onClick={() => setActivePage('experience')} icon={Briefcase} index={1}>Exp</NavItem>
-            <NavItem active={activePage === 'services'} onClick={() => setActivePage('services')} icon={Zap} index={2}>Services</NavItem>
-            <NavItem active={activePage === 'education'} onClick={() => setActivePage('education')} icon={BookOpen} index={3}>Edu</NavItem>
-            <NavItem active={activePage === 'ministry'} onClick={() => setActivePage('ministry')} icon={Heart} index={4}>Ministry</NavItem>
-            <NavItem active={activePage === 'bio'} onClick={() => setActivePage('bio')} icon={User} index={5}>Bio</NavItem>
-            <NavItem active={activePage === 'contact'} onClick={() => setActivePage('contact')} icon={Mail} index={6}>Contact</NavItem>
-            <NavItem active={activePage === 'faq'} onClick={() => setActivePage('faq')} icon={HelpCircle} index={7}>FAQ</NavItem>
-            <NavItem active={activePage === 'creator'} onClick={() => setActivePage('creator')} icon={Code} index={8}>Dev</NavItem>
+        {/* --- MOBILE HEADER & MENU --- */}
+        <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 py-3 flex justify-between items-center shadow-sm">
+            <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center text-white font-bold shadow-md">P</div>
+                <span className="font-bold text-slate-800 tracking-tight">Prasath R.</span>
+            </div>
+            <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+                className="p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors active:scale-95"
+            >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+        </header>
+
+        {isMobileMenuOpen && (
+            <div className="md:hidden fixed top-[60px] left-0 right-0 z-40 bg-white border-b border-slate-200 shadow-2xl animate-slideDown max-h-[calc(100vh-60px)] overflow-y-auto">
+                <div className="p-4 flex flex-col gap-1.5">
+                    {navItems.map((item) => (
+                        <button
+                            key={item.id}
+                            onClick={() => { setActivePage(item.id as PageType); setIsMobileMenuOpen(false); }}
+                            className={`flex items-center gap-3 p-3 rounded-xl transition-all ${
+                                activePage === item.id 
+                                    ? 'bg-teal-50 text-teal-700 font-bold border border-teal-100 shadow-sm' 
+                                    : 'text-slate-600 hover:bg-slate-50 border border-transparent'
+                            }`}
+                        >
+                            <item.icon size={20} className={activePage === item.id ? 'text-teal-600' : 'text-slate-400'} />
+                            {item.label}
+                        </button>
+                    ))}
+                    <button
+                        onClick={() => { window.print(); setIsMobileMenuOpen(false); }}
+                        className="flex items-center gap-3 p-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all font-medium border-t border-slate-100 mt-2"
+                    >
+                        <Download size={20} className="text-slate-400" /> Resume
+                    </button>
+                </div>
+            </div>
+        )}
+
+        {/* --- DESKTOP NAVIGATION --- */}
+        <nav className="hidden md:flex fixed top-0 left-0 right-0 z-50 justify-center p-4">
+          <div className="bg-white/90 backdrop-blur-md border border-slate-200 shadow-xl rounded-full px-2 py-2 flex items-center gap-1">
+            {navItems.map((item, index) => (
+                <NavItem 
+                    key={item.id}
+                    active={activePage === item.id} 
+                    onClick={() => setActivePage(item.id as PageType)} 
+                    icon={item.icon} 
+                    index={index}
+                >
+                    {item.label}
+                </NavItem>
+            ))}
             <button
               onClick={() => window.print()}
-              className="relative flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full transition-all duration-500 overflow-hidden group hover:-translate-y-1 whitespace-nowrap text-white bg-slate-900 shadow-lg hover:shadow-teal-500/20 hover:bg-teal-600 ml-1 shrink-0"
+              className="relative flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-500 overflow-hidden group hover:-translate-y-1 whitespace-nowrap text-white bg-slate-900 shadow-lg hover:shadow-teal-500/20 hover:bg-teal-600 ml-1 shrink-0"
             >
-               <Download size={14} className="md:w-4 md:h-4" /> <span className="text-xs md:text-sm font-bold">Resume</span>
+               <Download size={14} className="md:w-4 md:h-4" /> <span className="text-sm font-bold">Resume</span>
             </button>
           </div>
         </nav>
 
         {/* Main Content Area */}
-        <main className="relative z-10 pt-24 md:pt-28 pb-12 px-4 md:px-8 max-w-7xl mx-auto min-h-screen flex flex-col">
+        <main className="relative z-10 pt-20 md:pt-28 pb-12 px-4 md:px-8 max-w-7xl mx-auto min-h-screen flex flex-col">
           {renderPage()}
         </main>
 
@@ -209,21 +266,20 @@ const App: React.FC = () => {
               </div>
             </div>
 
-            {/* Bottom Bar: Copyright & PROMINENT Designer Credit */}
+            {/* Bottom Bar: Copyright & Designer Credit */}
             <div className="py-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs">
                <div className="text-slate-600 text-center md:text-left">
                  &copy; 2025 Prasath Portfolio. All Rights Reserved.
                </div>
 
-               {/* DESIGNER CREDIT - BIGGER & BOLD */}
+               {/* DESIGNER CREDIT - ELEGANT BADGE */}
                <button 
                   onClick={() => { setActivePage('creator'); window.scrollTo({top: 0, behavior: 'smooth'}); }}
-                  className="group flex flex-col md:flex-row items-center gap-2 md:gap-3 px-6 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-teal-500/30 transition-all duration-300 mt-2 md:mt-0"
+                  className="group flex items-center gap-3 px-5 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/5 hover:border-teal-500/20 transition-all duration-500"
                >
-                  <span className="text-slate-500 text-xs md:text-sm font-bold uppercase tracking-widest group-hover:text-teal-400 transition-colors">Designed by</span>
-                  <div className="flex items-center gap-2">
-                    <Code size={24} className="text-slate-600 group-hover:text-teal-400 transition-colors" />
-                    <span className="font-black text-xl md:text-3xl text-slate-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-blue-500 transition-all duration-300 drop-shadow-sm">
+                  <span className="text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em] group-hover:text-teal-400 transition-colors">Designed by</span>
+                  <div className="flex items-center gap-2 border-l border-white/10 pl-3">
+                    <span className="font-bold text-lg text-slate-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:via-teal-200 group-hover:to-white bg-size-200 animate-gradient-x transition-all">
                       S. Shaveesh Jeshurun
                     </span>
                   </div>
@@ -231,6 +287,9 @@ const App: React.FC = () => {
             </div>
           </div>
         </footer>
+
+        {/* AI Assistant Re-Added */}
+        <AIAssistant changePage={setActivePage} />
       </div>
     </>
   );
