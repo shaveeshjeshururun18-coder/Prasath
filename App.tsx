@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home as HomeIcon, Briefcase, Zap, BookOpen, Mail, Phone, MessageCircle, Heart, Linkedin, HelpCircle, Download, Code, ArrowUpRight, MapPin, Menu, X, User } from 'lucide-react';
+import { Home as HomeIcon, Briefcase, Zap, BookOpen, Mail, Phone, MessageCircle, Heart, Linkedin, HelpCircle, Download, Code, ArrowUpRight, MapPin, Menu, X, User, BarChart3 } from 'lucide-react';
 import { NavItem, NeuralBackground } from './components/Shared';
 import Home from './components/Home';
 import Experience from './components/Experience';
@@ -10,10 +10,11 @@ import Bio from './components/Bio';
 import Ministry from './components/Ministry';
 import FAQ from './components/FAQ';
 import AIPage from './components/AIPage';
+import Academics from './components/Academics';
 import { AIAssistant } from './components/AIAssistant';
 
 // Page Type Definition
-export type PageType = 'home' | 'projects' | 'skills' | 'education' | 'bio' | 'contact' | 'ministry' | 'faq' | 'ai';
+export type PageType = 'home' | 'projects' | 'skills' | 'education' | 'bio' | 'contact' | 'ministry' | 'faq' | 'ai' | 'academics';
 
 /* --- CINEMATIC TECH PRELOADER --- */
 const Preloader: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
@@ -92,9 +93,10 @@ const App: React.FC = () => {
 
   const navItems = [
     { id: 'home', label: 'Home', icon: HomeIcon },
-    { id: 'projects', label: 'Projects', icon: Briefcase }, // Renamed from Experience
-    { id: 'skills', label: 'Skills', icon: Zap }, // Renamed from Services
+    { id: 'projects', label: 'Projects', icon: Briefcase },
+    { id: 'skills', label: 'Skills', icon: Zap },
     { id: 'education', label: 'Edu', icon: BookOpen },
+    { id: 'academics', label: 'Grades', icon: BarChart3 },
     { id: 'ministry', label: 'Ministry', icon: Heart },
     { id: 'bio', label: 'Bio', icon: User },
     { id: 'contact', label: 'Contact', icon: Mail },
@@ -108,6 +110,7 @@ const App: React.FC = () => {
       case 'projects': return <Experience />;
       case 'skills': return <Services />;
       case 'education': return <Education />;
+      case 'academics': return <Academics />;
       case 'bio': return <Bio />;
       case 'contact': return <Contact />;
       case 'ministry': return <Ministry />;
@@ -169,7 +172,7 @@ const App: React.FC = () => {
 
         {/* --- DESKTOP NAVIGATION --- */}
         <nav className="hidden md:flex fixed top-0 left-0 right-0 z-50 justify-center p-4">
-          <div className="bg-white/90 backdrop-blur-md border border-slate-200 shadow-xl rounded-full px-2 py-2 flex items-center gap-1">
+          <div className="bg-white/90 backdrop-blur-md border border-slate-200 shadow-xl rounded-full px-2 py-2 flex items-center gap-1 overflow-x-auto no-scrollbar">
             {navItems.map((item, index) => (
                 <NavItem 
                     key={item.id}
@@ -227,7 +230,7 @@ const App: React.FC = () => {
               <div className="md:col-span-3">
                 <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-wider">Quick Access</h4>
                 <ul className="space-y-3">
-                  {['Projects', 'Skills', 'Education', 'Ministry'].map(item => (
+                  {['Projects', 'Skills', 'Academics', 'Ministry'].map(item => (
                     <li key={item}>
                       <button 
                         onClick={() => setActivePage(item.toLowerCase() as PageType)}
